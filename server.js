@@ -11,10 +11,6 @@ app.use(cors())
 app.use(parser.json())
 
 
-app.get('/', function(req,res, next) {
-    res.send('you got this')
-})
-
 app.get('/', function(req, res, next){
     knex('stretches')
     .then((rows) => {
