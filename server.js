@@ -15,5 +15,15 @@ app.get('/', function(req,res, next) {
     res.send('you got this')
 })
 
+app.get('/', function(req, res, next){
+    knex('stretches')
+    .then((rows) => {
+        res.send(rows)
+    })
+    .catch((err) => {
+        next(err)
+    })
+})
+
 
 app.listen(port, () => console.log(`Ayyyy hmu on ${port}`))
