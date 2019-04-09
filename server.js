@@ -21,5 +21,33 @@ app.get('/', function(req, res, next){
     })
 })
 
+app.get('/:email', function(req, res, next){
+    knex('users')
+        .where('email', req.params.email)
+        .first()
+        .then((user) => {
+            knex('saved')
+                .where('user_id', user.id)
+                .join('stretches', {'saved.stretch_id': 'stretches.id'})
+                .select('stretches.id','stretches.name', 'stretches.description', 'stretches.img' )
+                .then(savedStretches => (console.log(savedStretches)))
+        })
+        .catch((err) => {
+            next(err)
+        })
+})
+
+app.post('/:email', function(req, res, next){
+    knex('users')
+    .where('email', req.params.email)
+    .first()
+    .then((user) => {
+        knex('saved')
+        .insert({
+            user_id: user.id,
+            stretch_id: req.body.stretch_id
+        })
+    })
+})
 
 app.listen(port, () => console.log(`Ayyyy hmu on ${port}`))

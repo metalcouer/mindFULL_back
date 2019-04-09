@@ -6,16 +6,12 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('users').insert([
         {id: 1, 
-         name: 'Diane',
-         email: 'metalcouer@gmail.com',
-         age: '28'
-        },
-        {id: 2, 
          name: 'Leo',
          email: 'leonor77@gmail.com',
-         age: '25'
+         age: '25',
          },
-    
+        //where email = .com return Stretch id 
+        //join user stretch id with streych id
       ]);
     });
 };
