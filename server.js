@@ -26,11 +26,12 @@ app.get('/:email', function(req, res, next){
         .where('email', req.params.email)
         .first()
         .then((user) => {
-            knex('saved')
-                .where('user_id', user.id)
-                .join('stretches', {'saved.stretch_id': 'stretches.id'})
-                .select('stretches.id','stretches.name', 'stretches.description', 'stretches.img' )
-                .then(savedStretches => (console.log(savedStretches)))
+            
+                knex('saved')
+                 .where('user_id', user.id)
+                 .join('stretches', {'saved.stretch_id': 'stretches.id'})
+                 .select('stretches.id','stretches.name', 'stretches.description', 'stretches.img' )
+                 .then(savedStretches => (res.send(savedStretches)))
         })
         .catch((err) => {
             next(err)
